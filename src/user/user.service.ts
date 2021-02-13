@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { getMongoManager, ObjectID, Repository } from 'typeorm';
+import { getMongoManager, getMongoRepository, ObjectID, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
     constructor(
-        // @InjectRepository(User)
-        // private userRepository: Repository<User>
+        @InjectRepository(User)
+        private userRepository: Repository<User>
     ) {}
 
     async getAll(): Promise<User[]> {
@@ -27,11 +27,15 @@ export class UserService {
         return manager.save(newUser)
     }
 
-    async delete(userId) {
-        const manager = getMongoManager()
-        const user = await manager.delete(User, { _id: userId})
-        console.log(user)
-        return user
+    async update(userId: string, updatedUserData: CreateUserDto) {
+        const manager = getMongoRepository(User);
+        manager.update(userId, updatedUserData)
+    }
+
+    async delete(userId: string) {
+        const manager = getMongoRepository(User)
+        const user = await manager.findOne(userId)
+        manager.delete(user)
     }
 
     async findByName(searchText) {
@@ -44,5 +48,10 @@ export class UserService {
                 ]
             }
         })
+    }
+
+    async findById(userId: string): Promise<User> {
+        const manager = getMongoRepository(User)
+        return await manager.findOne(userId);
     }
 }

@@ -14,6 +14,11 @@ export class UserController {
         return await this.userService.getAll();
     }
 
+    @Get("/:userId")
+    async findUserById(@Param('userId') userId: string) {
+        return await this.userService.findById(userId)
+    }
+
     @Get("/findByName/:searchText")
     async findUserByName(@Param('searchText') searchText: string) {
         return await this.userService.findByName(searchText)
@@ -22,6 +27,11 @@ export class UserController {
     @Post("/create")
     async create(@Body() newUserData: CreateUserDto) {
         return await this.userService.create(newUserData);
+    }
+
+    @Post("/update/:userId")
+    async update(@Param('userId') userId: string, @Body() updatedUserData: CreateUserDto) {
+        return await this.userService.update(userId, updatedUserData)
     }
 
     @Delete("/delete/:userId")
