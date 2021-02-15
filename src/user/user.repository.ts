@@ -4,6 +4,7 @@ import { User } from "./user.entity";
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
+
     async getAllUsers(): Promise<User[]> {
         const manager = getMongoManager();
         return manager.find(User)
