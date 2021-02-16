@@ -5,7 +5,9 @@ export class FailOption {
     // @ObjectIdColumn()
     // _id: ObjectID
 
-    @PrimaryColumn()
+    @PrimaryColumn({
+        default: 'Encaminhar para analista'
+    })
     label: string;
 
     @Column()

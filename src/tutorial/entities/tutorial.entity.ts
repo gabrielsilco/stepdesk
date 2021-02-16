@@ -13,6 +13,9 @@ export class Tutorial {
     @Column()
     type: TutorialType;
 
+    @Column()
+    keyWords: string;
+
     @Column(type => DefaultStep)
     defaultSteps: DefaultStep[]
 }

@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { StepType } from "../enums/step-type.enum";
-import { CreateOptionDto } from "./create-option.dto";
+import { CreateOptionDto } from "./option.dto";
 
 export class CreateStepDto {
     @ApiProperty({

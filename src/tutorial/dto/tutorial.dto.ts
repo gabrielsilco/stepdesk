@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { TutorialType } from "../enums/tutorial-type.enum";
-import { CreateStepDto } from "./create-step.dto";
+import { CreateStepDto } from "./step.dto";
 
 export class CreateTutorialDto {
     @ApiProperty({
@@ -14,6 +14,12 @@ export class CreateTutorialDto {
         description: 'Tutorial type'
     })
     readonly type: TutorialType;
+
+    @ApiProperty({
+        type: String,
+        description: 'Key words'
+    })
+    readonly keyWords: string;
 
     @ApiProperty({
         type: [CreateStepDto],
