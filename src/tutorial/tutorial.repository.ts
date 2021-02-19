@@ -29,6 +29,7 @@ export class TutorialRepository extends Repository<Tutorial> {
         return await manager.findOne(tutorialId)
     }
 
+    // TODO: configurar a busca para encontrar valores dentro da string
     async searchTutorials(searchText: string): Promise<Tutorial[]> {
         const manager = getMongoRepository(Tutorial);
         return await manager.find({

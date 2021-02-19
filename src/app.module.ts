@@ -5,12 +5,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { TutorialModule } from './tutorial/tutorial.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     UserModule,
     TypeOrmModule.forRoot(),
-    TutorialModule
+    TutorialModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

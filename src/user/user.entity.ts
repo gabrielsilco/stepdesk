@@ -1,7 +1,8 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ObjectID, ObjectIdColumn, Unique } from "typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 
 @Entity()
+@Unique(["email"])
 export class User {
 
     @ObjectIdColumn()
@@ -18,4 +19,7 @@ export class User {
 
     @Column()
     password: string;
+
+    @CreateDateColumn()
+    createdAt: Date;
 }
