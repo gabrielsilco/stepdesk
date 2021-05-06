@@ -11,8 +11,15 @@ export class Tutorial {
     @Column()
     title: string;
 
+    // TODO
+    // @Column(type => Warning)
+    // warning: Warning
+
     @Column()
-    type: TutorialType;
+    summary: string;
+
+    @Column()
+    tutorialType: TutorialType;
 
     @Column()
     keyWords: string;

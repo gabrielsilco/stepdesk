@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, ObjectID, ObjectIdColumn, Unique } from "typeorm";
-import { CreateUserDto } from "./dto/create-user.dto";
+import * as bcrypt from 'bcrypt'
 
 @Entity()
 @Unique(["email"])
@@ -14,12 +14,21 @@ export class User {
     @Column()
     lastName: string;
 
-    @Column()
+    @Column({ unique: true })
     email: string;
 
     @Column()
     password: string;
 
+    @Column()
+    salt: string;
+
     @CreateDateColumn()
     createdAt: Date;
+
+    async validatePassword(password: string): Promise<boolean> {
+        const hash = await bcrypt.hash(password, this.salt);
+
+        return hash === this.password;
+    }
 }

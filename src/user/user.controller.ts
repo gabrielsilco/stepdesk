@@ -1,11 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards, ValidationPipe } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ObjectID } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
 
 @ApiTags('user')
 @Controller('user')
+@UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth()
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
@@ -25,7 +28,7 @@ export class UserController {
     }
 
     @Post("/create")
-    async create(@Body() newUserData: CreateUserDto) {
+    async create(@Body(ValidationPipe) newUserData: CreateUserDto) {
         return await this.userService.create(newUserData);
     }
 

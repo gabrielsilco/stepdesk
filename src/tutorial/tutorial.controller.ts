@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateStepDto } from './dto/step.dto';
 import { CreateTutorialDto } from './dto/tutorial.dto';
 import { Tutorial } from './entities/tutorial.entity';
@@ -7,6 +8,9 @@ import { TutorialService } from './tutorial.service';
 
 @ApiTags('tutorial')
 @Controller('tutorial')
+@UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth()
+
 export class TutorialController {
     constructor(private readonly tutorialService: TutorialService) {}
 

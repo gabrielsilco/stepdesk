@@ -11,7 +11,7 @@ export class TutorialRepository extends Repository<Tutorial> {
         const newTutorial = new Tutorial();
         const { title, type, defaultSteps } = newTutorialData;
         newTutorial.title = title;
-        newTutorial.type = type;
+        newTutorial.tutorialType = type;
         newTutorial.defaultSteps = defaultSteps;
 
         await manager.save(newTutorial)
