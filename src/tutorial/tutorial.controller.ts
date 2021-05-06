@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateStepDto } from './dto/step.dto';
@@ -54,8 +54,8 @@ export class TutorialController {
             return this.tutorialService.insertStepToTutorial(tutorialId, newStepData, subsequentStep);
         }
 
-    @Post('/deleteStep/:tutorialId')
-    async removeStep(@Param('tutorialId') tutorialId: string, @Body() stepToRemove: number) {
+    @Delete('/deleteStep/:tutorialId/:stepToRemove')
+    async removeStep(@Param('tutorialId') tutorialId: string, @Param('stepToRemove') stepToRemove: number) {
         return this.tutorialService.removeStepFromTutorial(tutorialId, stepToRemove)
     }
 }

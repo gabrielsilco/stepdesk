@@ -41,6 +41,6 @@ export class TutorialService {
     }
 
     async removeStepFromTutorial(tutorialId: string, stepToRemove: number) {
-        return this.removeStepFromTutorial(tutorialId, stepToRemove)
+        return this.tutorialRepository.removeStepFromTutorial(tutorialId, stepToRemove)
     }
 }
