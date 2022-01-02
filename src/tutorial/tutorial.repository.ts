@@ -9,10 +9,14 @@ export class TutorialRepository extends Repository<Tutorial> {
     async createTutorial(newTutorialData: CreateTutorialDto): Promise<Tutorial> {
         const manager = getMongoManager();
         const newTutorial = new Tutorial();
-        const { title, type, defaultSteps } = newTutorialData;
+        const { title, warning, warningExpiration, summary, keyWords, type, defaultSteps } = newTutorialData;
         newTutorial.title = title;
+        newTutorial.warning = warning;
+        newTutorial.summary = summary;
+        newTutorial.warningExpiration = warningExpiration;
         newTutorial.tutorialType = type;
         newTutorial.defaultSteps = defaultSteps;
+        newTutorial.keyWords = keyWords;
 
         await manager.save(newTutorial)
         

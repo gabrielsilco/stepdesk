@@ -11,15 +11,33 @@ export class CreateTutorialDto {
 
     @ApiProperty({
         type: String,
+        description: 'Tutorial warning (if necessary)'
+    })
+    readonly warning: string;
+
+    @ApiProperty({
+        type: String,
+        description: 'Tutorial warning expiration date'
+    })
+    readonly warningExpiration: Date;
+
+    @ApiProperty({
+        type: String,
+        description: 'Tutorial summary'
+    })
+    readonly summary: string;
+
+    @ApiProperty({
+        type: String,
         description: 'Tutorial type'
     })
     readonly type: TutorialType;
 
     @ApiProperty({
-        type: String,
+        type: [String],
         description: 'Key words'
     })
-    readonly keyWords: string;
+    readonly keyWords: Array<String>;
 
     @ApiProperty({
         type: [CreateStepDto],

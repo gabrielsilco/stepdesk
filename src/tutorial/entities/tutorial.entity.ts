@@ -11,9 +11,11 @@ export class Tutorial {
     @Column()
     title: string;
 
-    // TODO
-    // @Column(type => Warning)
-    // warning: Warning
+    @Column()
+    warning: string;
+
+    @Column()
+    warningExpiration: Date;
 
     @Column()
     summary: string;
@@ -22,7 +24,7 @@ export class Tutorial {
     tutorialType: TutorialType;
 
     @Column()
-    keyWords: string;
+    keyWords: String[];
 
     @Column(type => DefaultStep)
     defaultSteps: DefaultStep[]
